@@ -113,7 +113,7 @@ export class Config {
             encryptionPassword = CLIQuestionUtility.askConnectionPassword(
               Messages.INTRO_MESSAGES.ASK_ENCRYPTION_PASSWORD_MESSAGE,
             );
-            if (!(await Encryptor.verifyPassword(appConfig.hash, encryptionPassword))) {
+            if (!(await Encryptor.verifyPassword(encryptionPassword, appConfig.hash))) {
               console.log(Messages.CORRUPTED_DATA_OR_PASSWORD);
               if (i === 2) {
                 console.log(Messages.INTRO_MESSAGES.APPLICATION_ATTEMPTS_QUIT);

@@ -1,6 +1,5 @@
 import * as CryptoJS from 'crypto-js';
-import * as argon2 from 'argon2';
-import { Messages } from '../../text/messages';
+import * as crypto from 'crypto';
 
 export class Encryptor {
   public static encryptDataMasterPwd(data: string, masterPwd: string): string {
@@ -13,15 +12,22 @@ export class Encryptor {
   }
 
   public static async hashPassword(password: string): Promise<string> {
-    return await argon2.hash(password);
+    return new Promise((resolve, reject) => {
+      const salt = crypto.randomBytes(8).toString('hex');
+      crypto.scrypt(password, salt, 64, (err, derivedKey) => {
+        if (err) reject(err);
+        resolve(salt + ':' + derivedKey.toString('hex'));
+      });
+    });
   }
 
-  public static async verifyPassword(hash: string, password: string): Promise<boolean> {
-    try {
-      return await argon2.verify(hash, password);
-    } catch (err) {
-      console.log(Messages.CORRUPTED_DATA);
-      process.exit(0);
-    }
+  public static async verifyPassword(password: string, hash: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const [salt, key] = hash.split(':');
+      crypto.scrypt(password, salt, 64, (err, derivedKey) => {
+        if (err) reject(err);
+        resolve(key == derivedKey.toString('hex'));
+      });
+    });
   }
 }
