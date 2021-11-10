@@ -139,6 +139,9 @@ async function bootstrap() {
   } else {
     connectionCredentials.token = CLIQuestionUtility.askConnectionToken();
     connectionCredentials.type = CLIQuestionUtility.askConnectionType();
+    if (connectionCredentials.type === ConnectionTypeEnum.oracledb) {
+      console.log(Messages.INTRO_MESSAGES.ORACLE_INSTANT_CLIENT);
+    }
     connectionCredentials.host = CLIQuestionUtility.askConnectionHost();
     connectionCredentials.port = CLIQuestionUtility.askConnectionPort();
     connectionCredentials.username = CLIQuestionUtility.askConnectionUserName();

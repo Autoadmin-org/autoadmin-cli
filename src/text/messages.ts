@@ -53,7 +53,6 @@ export const Messages = {
   SOCKET_WAS_DISCONNECTED: 'Socket is closed. Reconnect will be attempted in 1 second.',
   SOCKET_ENCOUNTERED_ERROR: (message: string): string =>
     `Socket connection error -> ${message ? message : ``}, Closing socket`,
-
   INTRO_MESSAGES: {
     WELCOME_MESSAGE:
       'Welcome! First of all, we need to configure the connection to your database. \n' +
@@ -87,5 +86,8 @@ export const Messages = {
     APPLICATION_CLI_QUIT: 'Quit the application',
     APPLICATION_ATTEMPTS_QUIT: `You entered incorrect value ${Constants.CLI_ATTEMPTS_COUNT} times. Please check your parameters and try again. Quit the application`,
     YOU_CHOOSE: (option: string) => `You choose ${option}`,
+    ORACLE_INSTANT_CLIENT: `Oracle database requires "Oracle instant client" to be installed on your computer.
+    You can find it on official Oracle website:
+    https://www.oracle.com/database/technologies/instant-client/downloads.html`,
   },
 };
