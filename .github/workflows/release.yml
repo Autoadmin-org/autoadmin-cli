@@ -40,6 +40,7 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: latest
           files: |
             autoadmin-cli-linux
             autoadmin-cli-macos
