@@ -1,0 +1,29 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build & Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install yarn
+      - run: yarn install
+      - run: npm install -g pkg
+      - run: yarn build
+      - run: cd dist
+      - run: pkg main.js
+      - run: mv ./main-linux ./autoadmin-cli-linux
+      - run: mv ./main-macos ./autoadmin-cli-macos
+      - run: mv ./main-win.exe ./autoadmin-cli-windows.exe
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            autoadmin-cli-linux
+            autoadmin-cli-macos
+            autoadmin-cli-windows.exe
