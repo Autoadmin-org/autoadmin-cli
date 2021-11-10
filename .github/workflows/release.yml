@@ -26,7 +26,7 @@ jobs:
         run: yarn build
 
       - name: Enter into dist
-        run: cd dist
+        run: cd /home/runner/work/autoadmin-cli/dist
 
       - name: Build binaries
         run: pkg main.js
