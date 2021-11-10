@@ -31,14 +31,17 @@ jobs:
       - name: Build binaries
         run: pkg ./dist/main.js
 
-      - name: Renave linux binary
-        run: mv ./dist/main-linux ./autoadmin-cli-linux
+      - name: Ls project
+        run: ls
 
-      - name: Renave macos binary
-        run: mv ./dist/main-macos ./autoadmin-cli-macos
+      - name: Rename linux binary
+        run: mv /dist/main-linux /autoadmin-cli-linux
 
-      - name: Renave windows binary
-        run: mv ./dist/main-win.exe ./autoadmin-cli-windows.exe
+      - name: Rename macos binary
+        run: mv /dist/main-macos /autoadmin-cli-macos
+
+      - name: Rename windows binary
+        run: mv /dist/main-win.exe /autoadmin-cli-windows.exe
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
