@@ -29,7 +29,10 @@ jobs:
         run: ls
 
       - name: Enter into dist
-        run: cd /autoadmin-cli/dist
+        run: cd dist
+
+      - name: Ls dist
+        run: ls
 
       - name: Build binaries
         run: pkg main.js
