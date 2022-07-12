@@ -78,9 +78,12 @@ export class DaoOracledb implements IDaoInterface {
           .catch((e) => {
             throw new Error(e);
           });
-        result = {
-          [primaryKey.column_name]: row[primaryKey.column_name],
-        };
+        const primaryKeys = primaryColumns.map((column) => column.column_name);
+        const resultsArray = [];
+        for (let i = 0; i < primaryKeys.length; i++) {
+          resultsArray.push([primaryKeys[i], row[primaryKeys[i]]]);
+        }
+        result = Object.fromEntries(resultsArray);
       }
     } else {
       result = await knex

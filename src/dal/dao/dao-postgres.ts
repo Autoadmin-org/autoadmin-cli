@@ -48,21 +48,19 @@ export class DaoPostgres extends BasicDao implements IDaoInterface {
 
     const primaryColumns = await this.getTablePrimaryColumns(tableName);
     if (primaryColumns?.length > 0) {
-      const primaryKey = primaryColumns[0];
+      const primaryKey = primaryColumns.map((column) => column.column_name);
       const result = await knex(tableName)
         .withSchema(this.connection.schema ? this.connection.schema : 'public')
-        .returning(primaryKey.column_name)
+        .returning(primaryKey)
         .insert(row);
-      return {
-        [primaryKey.column_name]: result[0],
-      };
+      return result[0] as unknown as Record<string, unknown>;
     } else {
       const rowFields = Object.keys(row);
       const result = await knex(tableName)
         .withSchema(this.connection.schema ? this.connection.schema : 'public')
         .returning(rowFields)
         .insert(row);
-      return result[0];
+      return result[0] as any;
     }
   }
 
