@@ -6,7 +6,7 @@ export async function checkConnection(connection: ICLIConnectionCredentials): Pr
   console.log('-> Test connection to database');
   const dao = createDao(connection);
   const result = await dao.testConnect();
-  if (result) {
+  if (result.result) {
     console.log('-> Database successfully connected');
   } else {
     console.log('-> Connection to database failed');

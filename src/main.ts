@@ -16,12 +16,7 @@ import { Constants } from './helpers/constants/constants';
 
 async function bootstrap() {
   const connectionCredentials: ICLIConnectionCredentials = Config.getConnectionConfig();
-  const app = await NestFactory.create(AppModule);
-  const port = connectionCredentials.app_port || 3000;
-  await app.listen(port, () => {
-    console.log(`Application listening on port ${port}`);
-  });
-
+  await NestFactory.create(AppModule);
   function connect() {
     const ws = new WebSocket('wss://ws.autoadmin.org:443/');
 
@@ -78,7 +73,8 @@ async function bootstrap() {
   const connection = await getConnectionToDbParams();
 
   async function tryConnectToDatabase(timeout = 2000) {
-    if (await checkConnection(connection)) {
+    const checkConnectionResult = (await checkConnection(connection)).result;
+    if (checkConnectionResult) {
       return;
     }
     let counter = 0;
@@ -86,7 +82,7 @@ async function bootstrap() {
       timeout += 2000;
       ++counter;
       const tryResult = await checkConnection(connection);
-      if (tryResult) {
+      if (tryResult.result) {
         return;
       } else {
         if (counter >= 6) {
@@ -154,7 +150,6 @@ async function bootstrap() {
     if (connectionCredentials.type === ConnectionTypeEnum.mssql) {
       connectionCredentials.azure_encryption = CLIQuestionUtility.askConnectionAzureEncryption();
     }
-    connectionCredentials.app_port = CLIQuestionUtility.askApplicationPort();
     connectionCredentials.cert = null;
     connectionCredentials.ssl = CLIQuestionUtility.askConnectionSslOption();
     connectionCredentials.application_save_option = CLIQuestionUtility.askApplicationSaveConfig();

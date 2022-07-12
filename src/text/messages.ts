@@ -60,12 +60,12 @@ export const Messages = {
       'what you received when you created an agent-connection on the autoadmin website: \n ->',
     CONNECTION_TYPE_MESSAGE: `Please choose the type of connection. 
     We support the following types: `,
-    CONNECTION_HOST_MESSAGE: `Please enter the host, where your database is located: \n ->`,
-    CONNECTION_PORT_MESSAGE: `Please enter the port, what your database is listening on your host: \n ->`,
-    CONNECTION_USERNAME_MESSAGE: `Please enter the login username of your database: \n ->`,
-    CONNECTION_PASSWORD_MESSAGE: `Please enter the password of your database: \n ->`,
-    CONNECTION_DATABASE_MESSAGE: `Please enter the database name: \n ->`,
-    CONNECTION_SCHEMA_MESSAGE: `Please enter the schema name. If it not exists leave this field empty: \n ->`,
+    CONNECTION_HOST_MESSAGE: `Please enter database host: \n ->`,
+    CONNECTION_PORT_MESSAGE: `Please enter database port: \n ->`,
+    CONNECTION_USERNAME_MESSAGE: `Please enter database login username: \n ->`,
+    CONNECTION_PASSWORD_MESSAGE: `Please enter database password: \n ->`,
+    CONNECTION_DATABASE_MESSAGE: `Please enter database name: \n ->`,
+    CONNECTION_SCHEMA_MESSAGE: `Please enter database schema name. If it not exists leave this field empty: \n ->`,
     CONNECTION_SID_MESSAGE: `You selected database type "Oracle Database", if it have instance identifier (SID) please enter it's name
     or leave this field empty, if it doesn't exist': \n ->`,
     CONNECTION_AZURE_ENCRYPTION_MESSAGE: `Azure encryption option.
