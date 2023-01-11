@@ -29,19 +29,19 @@ jobs:
         run: pkg ./dist/main.js
 
       - name: Rename linux binary
-        run: mv main-linux autoadmin-cli-linux
+        run: mv main-linux rocketadmin-cli-linux
 
       - name: Rename macos binary
-        run: mv main-macos autoadmin-cli-macos
+        run: mv main-macos rocketadmin-cli-macos
 
       - name: Rename windows binary
-        run: mv main-win.exe autoadmin-cli-windows.exe
+        run: mv main-win.exe rocketadmin-cli-windows.exe
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: latest
           files: |
-            autoadmin-cli-linux
-            autoadmin-cli-macos
-            autoadmin-cli-windows.exe
+            rocketadmin-cli-linux
+            rocketadmin-cli-macos
+            rocketadmin-cli-windows.exe
